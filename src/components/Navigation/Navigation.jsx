@@ -8,7 +8,13 @@ import styles from './Navigation.module.scss';
 const Navigation = props => {
   return (
     <div className={styles.navi}>
-      <img src={Logo} alt="Logo" width="160" height="60" />
+      <img
+        src={Logo}
+        alt="Logo"
+        width="160"
+        height="60"
+        className={styles.logo}
+      />
       <NavLink
         className={styles.button}
         activeClassName={styles.buttonActive}

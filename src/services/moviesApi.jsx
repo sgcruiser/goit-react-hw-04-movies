@@ -6,14 +6,14 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
 axios.defaults.params = {
   api_key: apiKey,
-  // language: 'en-US',
-  // include_adult: false,
+  language: 'en-US',
+  include_adult: false,
 };
 
 const fetchTrending = async () => {
   return await axios
     .get('trending/movie/day?')
-    .then(({ data }) => data.results)
+    .then(({ data }) => data)
     .catch(error =>
       console.error(error, 'The resource you requested could not be found.'),
     );
@@ -22,16 +22,17 @@ const fetchTrending = async () => {
 const fetchSearchMovies = async ({ searchQuery, pageNumber }) => {
   return await axios
     .get(`search/movie?&query=${searchQuery}&page=${pageNumber}`)
-    .then(({ data }) => data.results)
+    .then(({ data }) => data)
     .catch(error =>
       console.error(error, 'The resource you requested could not be found.'),
     );
 };
 
 const fetchMovieDetails = async id => {
+  console.log(id);
   return await axios
-    .get(`/movie/${id}`)
-    .then(({ data }) => data.results)
+    .get(`movie/${id}`)
+    .then(({ data }) => data)
     .catch(error =>
       console.error(error, 'The resource you requested could not be found.'),
     );
@@ -39,7 +40,7 @@ const fetchMovieDetails = async id => {
 
 const fetchMovieCredits = async id => {
   return await axios
-    .get(`/movie/${id}/credits`)
+    .get(`movie/${id}/credits`)
     .then(({ data }) => data.cast)
     .catch(error =>
       console.error(error, 'The resource you requested could not be found.'),
@@ -48,7 +49,7 @@ const fetchMovieCredits = async id => {
 
 const fetchMovieReviews = async id => {
   return await axios
-    .get(`/movie/${id}/reviews`)
+    .get(`movie/${id}/reviews`)
     .then(({ data }) => data.results)
     .catch(error =>
       console.error(error, 'The resource you requested could not be found.'),

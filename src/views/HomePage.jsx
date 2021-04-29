@@ -19,7 +19,7 @@ class HomePage extends Component {
     this.setState({ isLoadimg: true });
 
     await fetchTrending()
-      .then(data => this.setState({ movies: data }))
+      .then(data => this.setState({ movies: data.results }))
       .catch(error => this.setState({ error }));
   }
 

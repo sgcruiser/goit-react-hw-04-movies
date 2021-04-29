@@ -25,7 +25,7 @@ class MoviePage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchQuery !== this.state.searchQuery) {
-      this.fetchMovies();
+      this.getMovies();
     }
   }
 
@@ -38,19 +38,20 @@ class MoviePage extends Component {
     });
   };
 
-  async fetchMovies() {
+  async getMovies() {
     const { searchQuery, pageNumber } = this.state;
     const arg = { searchQuery, pageNumber };
 
     this.setState({ isLoadimg: true });
 
     await fetchSearchMovies(arg)
-      .then(data => this.setState({ movies: data }))
+      .then(data => this.setState({ movies: data.results }))
       .catch(error => this.setState({ error }));
   }
 
   render() {
     const { movies, isLoading, searchQuery, error } = this.state;
+    console.log(this.props);
 
     return (
       <Fragment>

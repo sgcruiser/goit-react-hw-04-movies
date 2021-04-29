@@ -16,8 +16,8 @@ class Cast extends Component {
     this.getMovieCredits(movieId);
   }
 
-  getMovieCredits = movieId => {
-    fetchMovieCredits(movieId)
+  getMovieCredits = id => {
+    fetchMovieCredits(id)
       .then(data => this.setState({ cast: data.cast }))
       .catch(error => this.setState({ error }));
   };
@@ -29,12 +29,12 @@ class Cast extends Component {
       <Fragment>
         {cast && (
           <div>
-            {cast.map(item => (
+            {cast.map(({ name, profile_path, character }) => (
               <li>
                 <CastCard
-                  imgUrl={item.profile_path}
-                  name={item.name}
-                  character={item.character}
+                  img={profile_path}
+                  name={name}
+                  character={character}
                 />
               </li>
             ))}
