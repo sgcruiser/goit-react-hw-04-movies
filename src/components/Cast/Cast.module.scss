@@ -1,0 +1,11 @@
+.cast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__item {
+    min-width: 100px;
+    max-width: 150px;
+    margin: 10px;
+  }
+}

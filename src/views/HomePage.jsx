@@ -20,7 +20,8 @@ class HomePage extends Component {
 
     await fetchTrending()
       .then(data => this.setState({ movies: data.results }))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {

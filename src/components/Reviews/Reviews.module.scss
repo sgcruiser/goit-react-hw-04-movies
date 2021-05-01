@@ -1,0 +1,16 @@
+.reviews {
+  &list {
+    margin-bottom: 20px;
+  }
+
+  &item {
+    padding: 20px;
+    border-radius: 5px;
+
+    background-color: rgba(1, 180, 228, 0.15);
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}

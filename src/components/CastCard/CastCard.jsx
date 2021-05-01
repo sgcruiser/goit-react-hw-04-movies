@@ -11,9 +11,9 @@ const CastCard = ({ img, name, character }) => {
     : defaultImage;
   return (
     <Fragment>
-      <img src={imageUrl} alt={name} className={styles.img} />
-      <h2 className={styles.name}>{name}</h2>
-      <p className={styles.info}>{character}</p>
+      <img src={imageUrl} alt={name} className={styles.cast__img} />
+      <h2 className={styles.cast__name}>{name}</h2>
+      <p className={styles.cast__info}>{character}</p>
     </Fragment>
   );
 };
@@ -29,4 +29,5 @@ CastCard.propTypes = {
   name: PropTypes.string,
   character: PropTypes.string,
 };
+
 export default CastCard;

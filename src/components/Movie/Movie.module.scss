@@ -1,26 +1,48 @@
-.card {
+.movieCard {
   display: flex;
   padding: 15px 75px;
   text-align: left;
   border-bottom: 1px solid rgb(1, 180, 228);
-}
-.img {
-  display: block;
-  border-radius: 5px;
-  width: 460px;
-  height: auto;
-  margin-right: 30px;
-}
 
-.title {
-  font-size: 30px;
-  margin-bottom: 20px;
-}
-.relise {
-}
-.genres {
-}
-.score {
-}
-.overviews {
+  &__img {
+    display: block;
+    margin-right: 30px;
+    width: 360px;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+    font-size: 30px;
+
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__relise {
+    margin-bottom: 5px;
+
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__genres {
+    margin-bottom: 5px;
+
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__score {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__overviews {
+    margin-bottom: 5px;
+
+    font-size: 20px;
+    font-weight: 500;
+  }
 }

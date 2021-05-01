@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 import { fetchSearchMovies } from '../services/moviesApi';
 import SearchForm from '../components/SearchForm';
@@ -46,12 +46,12 @@ class MoviePage extends Component {
 
     await fetchSearchMovies(arg)
       .then(data => this.setState({ movies: data.results }))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {
     const { movies, isLoading, searchQuery, error } = this.state;
-    console.log(this.props);
 
     return (
       <Fragment>
@@ -71,4 +71,4 @@ class MoviePage extends Component {
   }
 }
 
-export default withRouter(MoviePage);
+export default MoviePage;

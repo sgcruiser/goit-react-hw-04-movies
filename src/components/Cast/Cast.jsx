@@ -3,7 +3,7 @@ import { Component, Fragment } from 'react';
 import { fetchMovieCredits } from '../../services/moviesApi';
 
 import CastCard from '../CastCard';
-// import styles from './Cast.module.css';
+import styles from './Cast.module.scss';
 
 class Cast extends Component {
   state = {
@@ -12,15 +12,14 @@ class Cast extends Component {
 
   componentDidMount() {
     const { movieId } = this.props.match.params;
-
     this.getMovieCredits(movieId);
   }
 
-  getMovieCredits = id => {
-    fetchMovieCredits(id)
+  async getMovieCredits(id) {
+    await fetchMovieCredits(id)
       .then(data => this.setState({ cast: data.cast }))
       .catch(error => this.setState({ error }));
-  };
+  }
 
   render() {
     const { cast } = this.state;
@@ -28,9 +27,9 @@ class Cast extends Component {
     return (
       <Fragment>
         {cast && (
-          <div>
-            {cast.map(({ name, profile_path, character }) => (
-              <li>
+          <ul className={styles.cast}>
+            {cast.map(({ id, name, profile_path, character }) => (
+              <li key={id} className={styles.cast__item}>
                 <CastCard
                   img={profile_path}
                   name={name}
@@ -38,7 +37,7 @@ class Cast extends Component {
                 />
               </li>
             ))}
-          </div>
+          </ul>
         )}
       </Fragment>
     );

@@ -4,31 +4,33 @@ import { fetchMovieReviews } from '../../services/moviesApi';
 
 import ReviewsItem from '../ReviewsItem';
 
+import styles from './Reviews.module.scss';
+
 class Reviews extends Component {
   state = {
     reviews: [],
   };
 
-  componentDidMount(prevProps, prevState) {
+  componentDidMount() {
     const { movieId } = this.props.match.params;
     this.fetchReviews(movieId);
   }
 
-  fetchReviews = id => {
-    fetchMovieReviews(id)
+  async fetchReviews(id) {
+    await fetchMovieReviews(id)
       .then(data => {
-        this.setState({ reviews: data });
+        this.setState({ reviews: data.results });
       })
       .catch(error => this.setState({ error }));
-  };
+  }
 
   render() {
     const { reviews } = this.state;
 
     return (
-      <ul>
+      <div className={styles.reviews}>
         {reviews && (
-          <ul>
+          <ul className={styles.reviews__list}>
             {reviews.map(
               ({
                 id,
@@ -36,7 +38,7 @@ class Reviews extends Component {
                 created_at,
                 author_details: { username, avatar_path },
               }) => (
-                <li key={id}>
+                <li key={id} className={styles.reviews__item}>
                   <ReviewsItem
                     author={username}
                     text={content}
@@ -48,7 +50,7 @@ class Reviews extends Component {
             )}
           </ul>
         )}
-      </ul>
+      </div>
     );
   }
 }

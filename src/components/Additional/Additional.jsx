@@ -1,30 +1,39 @@
 import { Suspense, lazy, Fragment } from 'react';
 import { NavLink, Route, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import routes from '../../routes';
-import Loader from 'react-loader-spinner';
+import Loader from '../Loader';
 
 import styles from './Additional.module.scss';
 
-const Cast = lazy(() =>
-  import('../Cast/index' /* webpackChunkName: "cast-view" */),
-);
+const Cast = lazy(() => import('../Cast' /* webpackChunkName: "cast-view" */));
 const Reviews = lazy(() =>
-  import('../Reviews/index' /* webpackChunkName: "reviews-view" */),
+  import('../Reviews' /* webpackChunkName: "reviews-view" */),
 );
 
 const Additional = () => {
   return (
     <Fragment>
-      <div className={styles.comment}>
-        <h4 className={styles.title}>Additional information</h4>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <NavLink to={`${routes.cast}`}>Cast</NavLink>
+      <div className={styles.additional}>
+        <h4 className={styles.additional_title}>Additional information</h4>
+        <ul className={styles.additional_list}>
+          <li className={styles.additional_item}>
+            <NavLink
+              exact
+              to={`${routes.cast}`}
+              className={styles.additional__link}
+            >
+              Cast
+            </NavLink>
           </li>
-          <li className={styles.item}>
-            <NavLink to={`${routes.reviews}`}>Reviews</NavLink>
+          <li className={styles.additional_item}>
+            <NavLink
+              exact
+              to={`${routes.reviews}`}
+              className={styles.additional__link}
+            >
+              Reviews
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -36,10 +45,6 @@ const Additional = () => {
       </Suspense>
     </Fragment>
   );
-};
-
-Additional.propTypes = {
-  match: PropTypes.object.isRequired,
 };
 
 export default withRouter(Additional);
