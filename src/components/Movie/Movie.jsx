@@ -33,7 +33,7 @@ const Movie = ({ movieData, match, location, history }) => {
   return (
     <main>
       <Button textButton="Go back" onClickButton={handleClick} />
-      <Button textButton="Go back" />
+
       <div className={styles.movieCard}>
         <img
           src={imageUrl}
