@@ -8,11 +8,11 @@ const MoviesItem = ({ title, poster_path }) => {
     : defaultImage;
 
   return (
-    <div className={styles.card}>
-      <div className={styles.box}>
-        <img src={posterUrl} alt={title} className={styles.img} />
+    <div className={styles.moviesItem}>
+      <div className={styles.moviesItem__tumb}>
+        <img src={posterUrl} alt={title} className={styles.moviesItem__img} />
       </div>
-      <p className={styles.title}>
+      <p className={styles.moviesItem__title}>
         <span>{title}</span>
       </p>
     </div>

@@ -9,16 +9,17 @@ import defaultImage from './default-image.jpg';
 
 import styles from './Movie.module.scss';
 
-const Movie = ({ movieData, match, location, history }) => {
-  const {
-    title,
-    poster_path,
-    overview,
-    genres,
-    release_date,
-    vote_average,
-  } = movieData;
-
+const Movie = ({
+  title,
+  poster_path,
+  overview,
+  genres,
+  release_date,
+  vote_average,
+  match,
+  location,
+  history,
+}) => {
   const imageUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
     : defaultImage;
@@ -26,8 +27,8 @@ const Movie = ({ movieData, match, location, history }) => {
   const useScore = vote_average * 10;
   const releaseDate = `${release_date}`.slice(0, 4);
 
-  function handleClick(event) {
-    history.push(location?.state?.from || routes.home);
+  function handleClick() {
+    history.push(location?.state?.from || routes.movies);
   }
 
   return (
@@ -52,7 +53,6 @@ const Movie = ({ movieData, match, location, history }) => {
       <Additional />
     </main>
   );
-  // }
 };
 
 Movie.defaultProps = {

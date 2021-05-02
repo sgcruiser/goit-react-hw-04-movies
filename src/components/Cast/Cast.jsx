@@ -17,7 +17,10 @@ class Cast extends Component {
 
   async getMovieCredits(id) {
     await fetchMovieCredits(id)
-      .then(data => this.setState({ cast: data.cast }))
+      .then(data => {
+        this.setState({ cast: data.cast });
+        console.log(data);
+      })
       .catch(error => this.setState({ error }));
   }
 

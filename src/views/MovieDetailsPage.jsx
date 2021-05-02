@@ -9,7 +9,13 @@ import Loader from '../components/Loader';
 
 class MovieDetailsPage extends Component {
   state = {
-    movie: null,
+    // movie: [],
+    title: null,
+    poster_path: null,
+    overview: null,
+    genres: null,
+    release_date: null,
+    vote_average: null,
     isLoading: false,
     error: null,
   };
@@ -19,39 +25,52 @@ class MovieDetailsPage extends Component {
     this.getMovieDetails(movieId);
   }
 
-  async getMovieDetails(id) {
+  getMovieDetails = id => {
     this.setState({ isLoading: true });
 
-    await fetchMovieDetails(id)
-      .then(data => this.setState({ movie: data }))
-      .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ isLoading: false }));
-  }
+    fetchMovieDetails(id)
+      .then(data => {
+        this.setState({ ...data });
+        console.log(data);
+      })
+      .catch(error => this.setState({ error }));
+    // .finally(() => this.setState({ isLoading: false }));
+  };
 
-  handleClick = event => {
+  handleClick = () => {
     const { location, history } = this.props;
-    history.push(location?.state?.from || routes.home);
+    history.push(location?.state?.from || routes.movies);
   };
 
   render() {
-    const { isLoading, movie } = this.state;
+    const {
+      title,
+      poster_path,
+      overview,
+      genres,
+      release_date,
+      vote_average,
+      isLoading,
+    } = this.state;
     const { match, location, history } = this.props;
-    console.log(this.state);
 
     return (
       <Fragment>
-        <div>
-          {movie && (
-            <Movie
-              movieData={movie}
-              match={match}
-              location={location}
-              history={history}
-            />
-          )}
+        {title && (
+          <Movie
+            title={title}
+            poster_path={poster_path}
+            overview={overview}
+            genres={genres}
+            release_date={release_date}
+            vote_average={vote_average}
+            match={match}
+            location={location}
+            history={history}
+          />
+        )}
 
-          {isLoading && <Loader />}
-        </div>
+        {isLoading && <Loader />}
       </Fragment>
     );
   }

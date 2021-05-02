@@ -36,13 +36,13 @@ const Additional = () => {
             </NavLink>
           </li>
         </ul>
+
+        <Suspense fallback={<Loader />}>
+          <Route exact path={`${routes.cast}`} component={Cast} />
+
+          <Route exact path={`${routes.reviews}`} component={Reviews} />
+        </Suspense>
       </div>
-
-      <Suspense fallback={<Loader />}>
-        <Route exact path={`${routes.cast}`} component={Cast} />
-
-        <Route exact path={`${routes.reviews}`} component={Reviews} />
-      </Suspense>
     </Fragment>
   );
 };

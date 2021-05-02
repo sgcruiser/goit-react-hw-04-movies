@@ -20,6 +20,7 @@ class Reviews extends Component {
     await fetchMovieReviews(id)
       .then(data => {
         this.setState({ reviews: data.results });
+        console.log(data);
       })
       .catch(error => this.setState({ error }));
   }
