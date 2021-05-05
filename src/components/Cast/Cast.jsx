@@ -11,22 +11,22 @@ class Cast extends Component {
   };
 
   componentDidMount() {
-    const { movieId } = this.props.match.params;
+    const movieId = this.props.match.params.movieId;
+    // console.log(this.props);
     this.getMovieCredits(movieId);
   }
 
   async getMovieCredits(id) {
     await fetchMovieCredits(id)
       .then(data => {
-        this.setState({ cast: data.cast });
-        console.log(data);
+        this.setState({ ...data });
       })
       .catch(error => this.setState({ error }));
   }
 
   render() {
     const { cast } = this.state;
-
+    // console.log(cast);
     return (
       <Fragment>
         {cast && (
@@ -34,7 +34,7 @@ class Cast extends Component {
             {cast.map(({ id, name, profile_path, character }) => (
               <li key={id} className={styles.cast__item}>
                 <CastCard
-                  img={profile_path}
+                  image={profile_path}
                   name={name}
                   character={character}
                 />

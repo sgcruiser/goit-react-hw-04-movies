@@ -1,7 +1,7 @@
 import { Suspense, lazy, Fragment } from 'react';
 import { NavLink, Route, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import routes from '../../routes';
 import Loader from '../Loader';
 
 import styles from './Additional.module.scss';
@@ -11,7 +11,7 @@ const Reviews = lazy(() =>
   import('../Reviews' /* webpackChunkName: "reviews-view" */),
 );
 
-const Additional = () => {
+const Additional = ({ match }) => {
   return (
     <Fragment>
       <div className={styles.additional}>
@@ -20,7 +20,7 @@ const Additional = () => {
           <li className={styles.additional_item}>
             <NavLink
               exact
-              to={`${routes.cast}`}
+              to={`${match.url}/cast`}
               className={styles.additional__link}
             >
               Cast
@@ -29,7 +29,7 @@ const Additional = () => {
           <li className={styles.additional_item}>
             <NavLink
               exact
-              to={`${routes.reviews}`}
+              to={`${match.url}/reviews`}
               className={styles.additional__link}
             >
               Reviews
@@ -38,13 +38,17 @@ const Additional = () => {
         </ul>
 
         <Suspense fallback={<Loader />}>
-          <Route exact path={`${routes.cast}`} component={Cast} />
+          <Route exact path={`${match.path}/cast`} component={Cast} />
 
-          <Route exact path={`${routes.reviews}`} component={Reviews} />
+          <Route exact path={`${match.path}/reviews`} component={Reviews} />
         </Suspense>
       </div>
     </Fragment>
   );
+};
+
+Additional.propTypes = {
+  match: PropTypes.object.isRequired,
 };
 
 export default withRouter(Additional);

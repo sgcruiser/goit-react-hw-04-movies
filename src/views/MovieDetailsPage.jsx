@@ -9,7 +9,6 @@ import Loader from '../components/Loader';
 
 class MovieDetailsPage extends Component {
   state = {
-    // movie: [],
     title: null,
     poster_path: null,
     overview: null,
@@ -25,21 +24,22 @@ class MovieDetailsPage extends Component {
     this.getMovieDetails(movieId);
   }
 
-  getMovieDetails = id => {
+  async getMovieDetails(id) {
     this.setState({ isLoading: true });
 
-    fetchMovieDetails(id)
+    await fetchMovieDetails(id)
       .then(data => {
         this.setState({ ...data });
-        console.log(data);
+        // console.log('после записи в state:', data);
       })
-      .catch(error => this.setState({ error }));
-    // .finally(() => this.setState({ isLoading: false }));
-  };
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
+  }
 
   handleClick = () => {
     const { location, history } = this.props;
-    history.push(location?.state?.from || routes.movies);
+    console.log(this.props);
+    history.push(location?.state?.from || routes.home);
   };
 
   render() {
@@ -52,7 +52,8 @@ class MovieDetailsPage extends Component {
       vote_average,
       isLoading,
     } = this.state;
-    const { match, location, history } = this.props;
+    // const { match, location, history } = this.props;
+    console.log(this.props);
 
     return (
       <Fragment>
@@ -64,9 +65,10 @@ class MovieDetailsPage extends Component {
             genres={genres}
             release_date={release_date}
             vote_average={vote_average}
-            match={match}
-            location={location}
-            history={history}
+            handleClick={this.handleClick}
+            // match={match}
+            // location={location}
+            // history={history}
           />
         )}
 

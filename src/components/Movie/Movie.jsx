@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import routes from '../../routes';
+// import routes from '../../routes';
 import Button from '../Button';
 import Additional from '../Additional';
 
@@ -16,9 +16,7 @@ const Movie = ({
   genres,
   release_date,
   vote_average,
-  match,
-  location,
-  history,
+  handleClick,
 }) => {
   const imageUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -26,10 +24,6 @@ const Movie = ({
 
   const useScore = vote_average * 10;
   const releaseDate = `${release_date}`.slice(0, 4);
-
-  function handleClick() {
-    history.push(location?.state?.from || routes.movies);
-  }
 
   return (
     <main>
@@ -44,10 +38,16 @@ const Movie = ({
         />
         <div>
           <h3 className={styles.movieCard__title}>{title}</h3>
-          <p className={styles.movieCard__score}>Use score : {useScore}</p>
+          <p className={styles.movieCard__score}>Use score : {useScore}%</p>
           <p className={styles.movieCard__relise}>{releaseDate}</p>
           <p className={styles.movieCard__overview}>{overview}</p>
-          <div className={styles.movieCard__genres}>{genres}</div>
+          <ul className={styles.movieCard__genres}>
+            {genres.map(({ id, name }) => (
+              <li key={id}>
+                <span>{name}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <Additional />
@@ -70,8 +70,8 @@ Movie.propTypes = {
   genres: PropTypes.array,
   release_date: PropTypes.string,
   vote_average: PropTypes.number,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired,
+  // location: PropTypes.object.isRequired,
 };
 
 export default withRouter(Movie);

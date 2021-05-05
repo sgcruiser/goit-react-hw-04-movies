@@ -1,28 +1,27 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const ReviewsItem = ({ author, text, date, img }) => {
-  const imageUrl = img ? `https://image.tmdb.org/t/p/w500/${img}` : null;
+import styles from './ReviewsItem.module.scss';
+
+const ReviewsItem = ({ author, text, date }) => {
+  const dateReviews = new Date(`${date}`).toString();
 
   return (
     <Fragment>
-      <img src={imageUrl} alt={author} width="100" />
-      <h3>{author}</h3>
-      <p>{text}</p>
-      <div>{date}</div>
+      <h3 className={styles.review__author}>{author}</h3>
+      <p className={styles.review__text}>{text}</p>
+      <div className={styles.review__date}>{dateReviews}</div>
     </Fragment>
   );
 };
 
 ReviewsItem.defaultProps = {
-  img: '',
   author: '',
   text: '',
   date: 'XXXX-XX-XX',
 };
 
 ReviewsItem.propTypes = {
-  img: PropTypes.string,
   author: PropTypes.string,
   text: PropTypes.string,
   date: PropTypes.string,

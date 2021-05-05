@@ -5,9 +5,9 @@ import defaultImage from './avatar.png';
 
 import styles from './CastCard.module.scss';
 
-const CastCard = ({ img, name, character }) => {
-  const imageUrl = img
-    ? `https://image.tmdb.org/t/p/w500/${img}`
+const CastCard = ({ image, name, character }) => {
+  const imageUrl = image
+    ? `https://image.tmdb.org/t/p/w500/${image}`
     : defaultImage;
   return (
     <Fragment>
@@ -19,13 +19,13 @@ const CastCard = ({ img, name, character }) => {
 };
 
 CastCard.defaultProps = {
-  img: defaultImage,
+  image: defaultImage,
   name: 'Actor/Actresse',
   character: '',
 };
 
 CastCard.propTypes = {
-  img: PropTypes.string,
+  image: PropTypes.string,
   name: PropTypes.string,
   character: PropTypes.string,
 };

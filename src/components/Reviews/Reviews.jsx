@@ -8,7 +8,7 @@ import styles from './Reviews.module.scss';
 
 class Reviews extends Component {
   state = {
-    reviews: [],
+    results: [],
   };
 
   componentDidMount() {
@@ -19,20 +19,20 @@ class Reviews extends Component {
   async fetchReviews(id) {
     await fetchMovieReviews(id)
       .then(data => {
-        this.setState({ reviews: data.results });
+        this.setState({ ...data });
         console.log(data);
       })
       .catch(error => this.setState({ error }));
   }
 
   render() {
-    const { reviews } = this.state;
+    const { results } = this.state;
 
     return (
       <div className={styles.reviews}>
-        {reviews && (
+        {results && (
           <ul className={styles.reviews__list}>
-            {reviews.map(
+            {results.map(
               ({
                 id,
                 content,
@@ -44,7 +44,7 @@ class Reviews extends Component {
                     author={username}
                     text={content}
                     date={created_at}
-                    img={avatar_path}
+                    image={avatar_path}
                   />
                 </li>
               ),

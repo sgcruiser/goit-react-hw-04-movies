@@ -20,29 +20,34 @@
     font-weight: 600;
   }
 
-  &__relise {
-    margin-bottom: 5px;
-
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  &__genres {
-    margin-bottom: 5px;
-
-    font-size: 20px;
-    font-weight: 400;
-  }
-
   &__score {
     margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  &__overviews {
+  &__relise {
     margin-bottom: 5px;
 
     font-size: 20px;
     font-weight: 500;
+  }
+
+  &__overview {
+    margin-bottom: 7px;
+
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  &__genres {
+    display: flex;
+    margin-top: 7px;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    & > li:not(:last-child) {
+      margin-right: 10px;
+    }
   }
 }

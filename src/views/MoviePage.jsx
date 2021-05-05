@@ -47,7 +47,7 @@ class MoviePage extends Component {
     await fetchSearchMovies(arg)
       .then(data => {
         this.setState({ movies: data.results });
-        console.log(data);
+        // console.log(data);
       })
       .catch(error => this.setState({ error }))
       .finally(() => this.setState({ isLoading: false }));
