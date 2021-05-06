@@ -1,4 +1,3 @@
-// import { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import routes from '../../routes';
 import Logo from './blue_short.svg';
