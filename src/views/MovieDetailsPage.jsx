@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import routes from '../routes';
 import { fetchMovieDetails } from '../services/moviesApi';
-import Movie from '../components/Movie';
 
+import Button from '../components/Button';
+import Movie from '../components/Movie';
 import Loader from '../components/Loader';
 
 class MovieDetailsPage extends Component {
@@ -30,7 +31,6 @@ class MovieDetailsPage extends Component {
     await fetchMovieDetails(id)
       .then(data => {
         this.setState({ ...data });
-        // console.log('после записи в state:', data);
       })
       .catch(error => this.setState({ error }))
       .finally(() => this.setState({ isLoading: false }));
@@ -38,7 +38,6 @@ class MovieDetailsPage extends Component {
 
   handleClick = () => {
     const { location, history } = this.props;
-    console.log(this.props);
     history.push(location?.state?.from || routes.home);
   };
 
@@ -52,11 +51,11 @@ class MovieDetailsPage extends Component {
       vote_average,
       isLoading,
     } = this.state;
-    // const { match, location, history } = this.props;
-    console.log(this.props);
 
     return (
       <Fragment>
+        <Button textButton="Go back" onClickButton={this.handleClick} />
+
         {title && (
           <Movie
             title={title}
@@ -65,10 +64,6 @@ class MovieDetailsPage extends Component {
             genres={genres}
             release_date={release_date}
             vote_average={vote_average}
-            handleClick={this.handleClick}
-            // match={match}
-            // location={location}
-            // history={history}
           />
         )}
 

@@ -13,6 +13,7 @@ class Reviews extends Component {
 
   componentDidMount() {
     const { movieId } = this.props.match.params;
+
     this.fetchReviews(movieId);
   }
 
@@ -20,7 +21,6 @@ class Reviews extends Component {
     await fetchMovieReviews(id)
       .then(data => {
         this.setState({ ...data });
-        console.log(data);
       })
       .catch(error => this.setState({ error }));
   }

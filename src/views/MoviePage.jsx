@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import { fetchSearchMovies } from '../services/moviesApi';
 import SearchForm from '../components/SearchForm';
@@ -15,13 +16,16 @@ class MoviePage extends Component {
     error: null,
   };
 
-  componentDidMount = () => {
-    if (this.props.location.state?.query) {
+  componentDidMount() {
+    const { search, pathname } = this.props.location;
+    const { query } = queryString.parse(search);
+
+    if (search && pathname) {
       this.setState({
-        searchQuery: this.props.location.state.query,
+        searchQuery: query,
       });
     }
-  };
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchQuery !== this.state.searchQuery) {
@@ -36,6 +40,10 @@ class MoviePage extends Component {
       searchQuery: query,
       error: null,
     });
+
+    this.props.history.push({
+      search: `query=${query}`,
+    });
   };
 
   async getMovies() {
@@ -47,14 +55,13 @@ class MoviePage extends Component {
     await fetchSearchMovies(arg)
       .then(data => {
         this.setState({ movies: data.results });
-        // console.log(data);
       })
       .catch(error => this.setState({ error }))
       .finally(() => this.setState({ isLoading: false }));
   }
 
   render() {
-    const { movies, isLoading, searchQuery, error } = this.state;
+    const { movies, isLoading, error } = this.state;
 
     return (
       <Fragment>
@@ -66,7 +73,7 @@ class MoviePage extends Component {
           </error>
         )}
 
-        <MoviesList moviesList={movies} query={searchQuery} />
+        <MoviesList moviesList={movies} />
 
         {isLoading && <Loader />}
       </Fragment>
@@ -74,4 +81,4 @@ class MoviePage extends Component {
   }
 }
 
-export default MoviePage;
+export default withRouter(MoviePage);

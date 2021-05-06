@@ -12,7 +12,7 @@ class Cast extends Component {
 
   componentDidMount() {
     const movieId = this.props.match.params.movieId;
-    // console.log(this.props);
+
     this.getMovieCredits(movieId);
   }
 
@@ -26,7 +26,7 @@ class Cast extends Component {
 
   render() {
     const { cast } = this.state;
-    // console.log(cast);
+
     return (
       <Fragment>
         {cast && (

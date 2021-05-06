@@ -11,7 +11,7 @@ const Reviews = lazy(() =>
   import('../Reviews' /* webpackChunkName: "reviews-view" */),
 );
 
-const Additional = ({ match }) => {
+const Additional = ({ match, location }) => {
   return (
     <Fragment>
       <div className={styles.additional}>
@@ -20,7 +20,10 @@ const Additional = ({ match }) => {
           <li className={styles.additional_item}>
             <NavLink
               exact
-              to={`${match.url}/cast`}
+              to={{
+                pathname: `${match.url}/cast`,
+                state: { ...location.state },
+              }}
               className={styles.additional__link}
             >
               Cast
@@ -29,7 +32,10 @@ const Additional = ({ match }) => {
           <li className={styles.additional_item}>
             <NavLink
               exact
-              to={`${match.url}/reviews`}
+              to={{
+                pathname: `${match.url}/reviews`,
+                state: { ...location.state },
+              }}
               className={styles.additional__link}
             >
               Reviews

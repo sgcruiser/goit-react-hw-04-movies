@@ -1,8 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-// import routes from '../../routes';
-import Button from '../Button';
 import Additional from '../Additional';
 
 import defaultImage from './default-image.jpg';
@@ -16,7 +14,6 @@ const Movie = ({
   genres,
   release_date,
   vote_average,
-  handleClick,
 }) => {
   const imageUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -27,8 +24,6 @@ const Movie = ({
 
   return (
     <main>
-      <Button textButton="Go back" onClickButton={handleClick} />
-
       <div className={styles.movieCard}>
         <img
           src={imageUrl}
@@ -70,8 +65,6 @@ Movie.propTypes = {
   genres: PropTypes.array,
   release_date: PropTypes.string,
   vote_average: PropTypes.number,
-  // history: PropTypes.object.isRequired,
-  // location: PropTypes.object.isRequired,
 };
 
 export default withRouter(Movie);

@@ -7,7 +7,7 @@ import MoviesItem from '../MoviesItem';
 
 import styles from './MoviesList.module.scss';
 
-const MoviesList = ({ moviesList, location, query, titleList }) => {
+const MoviesList = ({ moviesList, location, titleList }) => {
   return (
     <Fragment>
       {titleList && <h1 className={styles.title}>{titleList}</h1>}
@@ -18,7 +18,7 @@ const MoviesList = ({ moviesList, location, query, titleList }) => {
             <Link
               to={{
                 pathname: `${routes.movies}/${id}`,
-                state: { from: location, query: query },
+                state: { from: location },
               }}
               className={styles.link}
             >
